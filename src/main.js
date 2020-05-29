@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import $ from 'jquery'
 
 import './css/myStyle.css'
 import App from './App.vue'

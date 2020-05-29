@@ -9,14 +9,14 @@
             <p class="ui header" style="border-bottom:1px solid;font-weight:200">● 您的私人影像馆</p>
           </div>
         </div>
-        <div class="ui right item">
-          <div class="ui icon input m-shadow-small" style="margin-left:500px">
+        <div class="ui stackable item" style="margin-left:40px;">
+           <div class="ui icon input m-shadow-small" ><!--style="margin-left:500px" -->
             <input type="text" placeholder="Search..." />
             <i class="inverted circular search link icon"></i>
           </div>
         </div>
 
-        <div class="right item m-shadow-small">
+        <div class="right stackable item m-shadow-small">
           <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"
@@ -103,6 +103,7 @@ export default {
 
 <style scoped>
 nav {
+  z-index: 999;
   width: 100%;
   position: fixed !important;
   padding-top: 2em !important;
