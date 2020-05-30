@@ -138,7 +138,7 @@ export default {
       this.image_cards.push({
         id: 2,
         url:
-          "http://img0.imgtn.bdimg.com/it/u=3769023270,3433174748&fm=214&gp=0.jpg"
+          "http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1305/03/c0/20496484_1367549048818.jpg"
       });
       this.image_cards.push({
         id: 3,

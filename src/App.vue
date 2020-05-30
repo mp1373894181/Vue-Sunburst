@@ -54,7 +54,9 @@
 
     </el-tabs>-->
     <!-- 中间区域 -->
-    <router-view></router-view>
+    <transition appear mode="out-in">
+      <router-view></router-view>
+    </transition>
     <!-- tab-bar区域 -->
     <nav class="ui inverted vertical segment center aligned">
       <div class="ui container">
@@ -102,6 +104,18 @@ export default {
 </script>
 
 <style scoped>
+
+.v-enter,.v-leave-to {
+  opacity: 0;
+  /* transform: translateX(150px); */
+  transform: rotateY(55deg);
+}
+
+.v-enter-active , .v-leave-active {
+  transition: all 0.8s ease;
+}
+
+
 nav {
   z-index: 999;
   width: 100%;
