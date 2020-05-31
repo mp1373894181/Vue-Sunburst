@@ -6,10 +6,10 @@
         <div class="left item" style="padding: 0em !important;margin: 0 !important">
           <img src="/image/logo.jpg" alt class="ui small image" style="height:80px;width:110px" />
           <div class="ui content">
-            <p class="ui header" style="border-bottom:1px solid;font-weight:200">● 您的私人影像馆</p>
+            <p class="ui header" style="border-bottom:1px solid;font-weight:200;cursor:pointer">● 您的私人影像馆</p>
           </div>
         </div>
-        <div class="ui stackable item" style="margin-left:40px;">
+        <div class="ui stackable item" style="position:relative;left:80px">
            <div class="ui icon input m-shadow-small" ><!--style="margin-left:500px" -->
             <input type="text" placeholder="Search..." />
             <i class="inverted circular search link icon"></i>
@@ -54,36 +54,44 @@
 
     </el-tabs>-->
     <!-- 中间区域 -->
-    <transition appear mode="out-in">
+    <transition name='content' appear mode="out-in">
       <router-view></router-view>
     </transition>
-    <!-- tab-bar区域 -->
-    <nav class="ui inverted vertical segment center aligned">
-      <div class="ui container">
-        <div class="ui large secondary inverted pointing menu">
-          <div class="item">
-            <i class="ui home icon"></i>
-            <router-link to="/home">主页</router-link>
-          </div>
-          <div class="item">
-            <i class="ui newspaper outline icon"></i>
-            <router-link to="/news">新闻</router-link>
-          </div>
-          <div class="item">
-            <i class="ui shopping basket icon"></i>
-            <router-link to="/shoppingCart">订单</router-link>
-          </div>
-          <div class="item">
-            <i class="ui user icon"></i>
-            <router-link to="/member">会员</router-link>
-          </div>
-          <div class="right item">
-            <a class="ui inverted button">登录</a>
-            <a class="ui inverted button">注册</a>
+    
+    <div class="ui icon button">
+      <button :class="btnClass" @click="hideBar()"><i class="angle double down large icon"></i></button>
+    </div>
+    
+    
+
+    <transition name="navbar">
+      <nav class="ui inverted vertical segment center aligned" v-show="showbar">
+        <div class="ui container">
+          <div class="ui large secondary inverted pointing menu">
+            <div class="item">
+              <i class="ui home icon"></i>
+              <router-link to="/home">主页</router-link>
+            </div>
+            <div class="item">
+              <i class="ui newspaper outline icon"></i>
+              <router-link to="/news">观影</router-link>
+            </div>
+            <div class="item">
+              <i class="ui shopping basket icon"></i>
+              <router-link to="/shoppingCart">订单</router-link>
+            </div>
+            <div class="item">
+              <i class="ui user icon"></i>
+              <router-link to="/member">会员</router-link>
+            </div>
+            <div class="right item">
+              <a class="ui inverted button">登录</a>
+              <a class="ui inverted button">注册</a>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </transition>
   </div>
 </template>
 
@@ -92,27 +100,66 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      activeIndex2: "1"
+      activeIndex2: "1",
+      showbar: true,
+      btnClass: ['ui','button','m-menu-btn']
     };
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    hideBar(obj){
+      this.showbar = !this.showbar;
+      this.btnClass.forEach(element => {
+        if(element === 'm-menu-btn'){
+          this.btnClass.pop();
+          this.btnClass.push('m-menu-btn-s');
+          return;
+        }
+
+        if(element === 'm-menu-btn-s'){
+          this.btnClass.pop();
+          this.btnClass.push('m-menu-btn');
+          return;
+        }
+      });
     }
+    // beforeEnter(ele){
+    //   ele.style.transform="translate(0,0)";
+    // },
+    // Enter(ele,done){
+    //   ele.offsetHeight
+    //   element.style.transform="translate(10px)";
+    //   element.style.transition="all 0.8s ease";
+    //   done();
+    // },
+    // afterEnter(ele){
+
+    // }
   }
 };
 </script>
 
 <style scoped>
 
-.v-enter,.v-leave-to {
+.content-enter,.content-leave-to {
   opacity: 0;
   /* transform: translateX(150px); */
   transform: rotateY(55deg);
 }
 
-.v-enter-active , .v-leave-active {
-  transition: all 0.8s ease;
+.content-enter-active , .content-leave-active {
+  transition: 0.8s ease;
+}
+
+.navbar-enter,.navbar-leave-to {
+  opacity: 0;
+  transform: translateY(150px); 
+}
+
+.navbar-enter-active , .navbar-leave-active {
+  transition: 1s ease;
 }
 
 
@@ -147,5 +194,39 @@ nav {
 .m-shadow-max {
     -webkit-box-shadow: 0 12px 18px rgba(0,0,0,0.9) !important;
     box-shadow: 0 12px 18px rgba(0,0,0,0.9) !important;
+}
+
+.m-menu-btn{
+
+  background-color: grey !important;
+  border-radius: 0 !important;
+  position: fixed;
+  left: 0;
+  bottom: 8.4em;
+}
+.m-menu-btn i{
+  position: relative;
+  left: 7px;
+}
+
+
+.m-menu-btn-s{
+  padding: 0;
+  margin: 0;
+  width:50px;
+  height:50px;
+  background-color: whitesmoke !important;
+  border-radius: 50% !important;
+  border:0.1rem solid rgb(243, 231, 231) !important;
+  position: fixed;
+  left: 2px;
+  bottom: 8.4em;
+  -webkit-box-shadow: 0 12px 18px rgba(0,0,0,0.9) !important;
+    box-shadow: 0 12px 18px rgba(0,0,0,0.4) !important;
+}
+
+.m-menu-btn-s i{
+  position: relative;
+  right: 4px;
 }
 </style>

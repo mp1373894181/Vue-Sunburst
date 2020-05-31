@@ -28,7 +28,7 @@
           <div class="ui segment vertical">
             <p class="ui header">最新发布 :</p>
       </div>
-        <div class="ui top attached segment vertical divided three column grid" @mouseover="flag=true" @mouseleave="flag=false">
+        <div class="ui top attached segment vertical divided three column grid" @mouseover="flag=true" @mouseleave="flag=false" style="cursor:pointer">
           <div class="column">
             <div class="ui fluid card m-hover-image">
               <div class="image">
